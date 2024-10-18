@@ -28,7 +28,7 @@ const main = () => {
       } else {
         telegramBot.sendMessage(msg.chat.id, "Please input correct Address");
       }
-    } else if (command === "list" && match[2]) {
+    } else if (command === "list") {
       let text = "";
       for (let account of accounts) {
         text += `Address: ${account.address}` + "\n";
