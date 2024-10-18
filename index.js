@@ -21,9 +21,13 @@ const main = () => {
       const account = new Account(match[2]);
       accounts.push(account);
     } else if (command === "balance") {
-      const account = new Account(match[2]);
-      const balance = await account.getBalance();
-      telegramBot.sendMessage(msg.chat.id, balance);
+      if (ethers.utils.isAddress(match[2])) {
+        const account = new Account(match[2]);
+        const balance = await account.getBalance();
+        telegramBot.sendMessage(msg.chat.id, balance);
+      } else {
+        telegramBot.sendMessage(msg.chat.id, "Please input correct Address");
+      }
     } else if (command === "list") {
       let text = "";
       for (let account of accounts) {
