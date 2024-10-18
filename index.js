@@ -17,10 +17,10 @@ const main = () => {
     const userId = msg.from.id;
     const command = match[1];
 
-    if (command === "add") {
+    if (command === "add" && match[2]) {
       const account = new Account(match[2]);
       accounts.push(account);
-    } else if (command === "balance") {
+    } else if (command === "balance" && match[2]) {
       if (ethers.utils.isAddress(match[2])) {
         const account = new Account(match[2]);
         const balance = await account.getBalance();
@@ -28,7 +28,7 @@ const main = () => {
       } else {
         telegramBot.sendMessage(msg.chat.id, "Please input correct Address");
       }
-    } else if (command === "list") {
+    } else if (command === "list" && match[2]) {
       let text = "";
       for (let account of accounts) {
         text += `Address: ${account.address}` + "\n";
